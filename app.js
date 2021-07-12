@@ -19,6 +19,7 @@ mongoose.connect(
 
 // middlewares
 app.use(morgan('dev'));
+app.use('/uploads', express.static('uploads'));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 

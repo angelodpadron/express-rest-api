@@ -6,6 +6,7 @@ const app = express();
 
 const productRouter = require('./api/routes/products');
 const orderRouter = require('./api/routes/orders');
+const userRouter = require('./api/routes/users');
 
 // mongo db
 mongoose.connect(
@@ -14,7 +15,8 @@ mongoose.connect(
     '@node-rest-shop.haj7x.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
     {
         useNewUrlParser: true,
-        useUnifiedTopology: true
+        useUnifiedTopology: true,
+        useCreateIndex: true
     });
 
 // middlewares
@@ -37,6 +39,7 @@ app.use((req, res, next) => {
 // routes
 app.use('/products', productRouter);
 app.use('/orders', orderRouter);
+app.use('/users', userRouter)
 
 // error handling
 app.use((req, res, next) => {

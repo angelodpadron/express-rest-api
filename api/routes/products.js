@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
 const multer = require('multer');
-const path = require('path');
+const checkAut = require('../middleware/check-auth');
 
 
 // db mapper
@@ -64,9 +64,9 @@ router.get('/', (req, res, next) => {
         });
 });
 
-router.post('/', upload.single('productImage'), (req, res, next) => {
+router.post('/', checkAut, upload.single('productImage'), (req, res, next) => {
 
-    console.log(req.file);
+    console.log(req);
 
     const product = new Product({
         _id: new mongoose.Types.ObjectId(),
@@ -129,7 +129,7 @@ router.get('/:productId', (req, res, next) => {
         });
 });
 
-router.patch('/:productId', (req, res, next) => {
+router.patch('/:productId', checkAut, (req, res, next) => {
     const id = req.params.productId;
     Product.findByIdAndUpdate(id, { $set: req.body }, { new: true })
         .then(result => {
@@ -151,7 +151,7 @@ router.patch('/:productId', (req, res, next) => {
         });
 });
 
-router.delete('/:productId', (req, res, next) => {
+router.delete('/:productId', checkAut, (req, res, next) => {
     const id = req.params.productId;
     Product.remove({ _id: id })
         .exec()

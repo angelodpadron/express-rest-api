@@ -5,7 +5,9 @@ const mongoose = require('mongoose');
 const Order = require('../models/order');
 const Product = require('../models/product');
 
-router.get('/', (req, res, next) => {
+const checkAut = require('../middleware/check-auth');
+
+router.get('/', checkAut, (req, res, next) => {
     Order.find()
         .select('quantity product _id')
         .exec()
@@ -29,7 +31,7 @@ router.get('/', (req, res, next) => {
     
 });
 
-router.post('/', (req, res, next) => {
+router.post('/', checkAut, (req, res, next) => {
     Product.findById(req.body.productId)
         .then(product => {
 
@@ -68,7 +70,7 @@ router.post('/', (req, res, next) => {
     
 });
 
-router.get('/:orderId', (req, res, next) => {
+router.get('/:orderId', checkAut, (req, res, next) => {
     Order.findById(req.params.orderId)
         .select('_id product quantity')
         .exec()
@@ -97,7 +99,7 @@ router.get('/:orderId', (req, res, next) => {
 
 });
 
-router.delete('/:orderId', (req, res, next) => {
+router.delete('/:orderId', checkAut, (req, res, next) => {
     Order.remove({_id: req.params.orderId})
         .exec()
         .then(result => {

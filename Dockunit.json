@@ -1,0 +1,19 @@
+{
+    "containers": [
+        {
+            "prettyName": "Node Latests",
+            "image": "google/nodejs:latest",
+            "beforeScripts": [
+                "npm install", "npm install -g mocha"
+            ],
+            "testCommand": "npm test"
+        }, {
+            "prettyName": "Node Deprecated",
+            "image": "tlovett1/nodejs:0.12",
+            "beforeScripts": [
+                "npm install", "npm install -g mocha"
+            ],
+            "testCommand": "npm test"
+        }
+    ]
+}

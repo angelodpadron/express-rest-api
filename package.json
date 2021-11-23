@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node server",
     "dev": "nodemon server",
-    "test": "set DEBUG=true && mocha --timeout 60000 --recursive --exit"
+    "test": "mocha --timeout 60000 --recursive --exit"
   },
   "keywords": [
     "node",

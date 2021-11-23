@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 mongoose.Promise = global.Promise;
-mongoose.set("debug", process.env.DEBUG != undefined);
+//mongoose.set("debug", process.env.DEBUG != undefined);
 
 const opts = {
   useNewUrlParser: true,
